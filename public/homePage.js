@@ -82,7 +82,7 @@ ApiConnector.getFavorites(response => {
     console.log(response);
     if (response.success) {
         console.log(response.success);
-        favoritesWidget.clearTable;
+        favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
     }
@@ -93,7 +93,21 @@ ApiConnector.getFavorites(response => {
 }
 );
 //#
-// 
+favoritesWidget.addUserCallback = data => ApiConnector.addUserToFavorites(data,response => {
+    console.log(response);
+    if (response.success) {
+        console.log(response.success);
+        favoritesWidget.clearTable();
+        favoritesWidget.fillTable(response.data);
+        moneyManager.updateUsersList(response.data);
+        favoritesWidget.setMessage(response.success, 'Пользователь добавлен');
+    } 
+    else {
+        console.log(response);
+        favoritesWidget.setMessage(response.success, response.error);
+    }   
+});
+// addUserCallback
 
 /*
 addMoney({ currency, amount }, callback) — запрос на добавление денег авторизованному пользователю
