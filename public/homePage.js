@@ -43,7 +43,7 @@ moneyManager.addMoneyCallback = data => ApiConnector.addMoney(data,response => {
     if (response.success) {
         console.log(response.success);
         ProfileWidget.showProfile(response.data);
-        moneyManager.setMessage(response.success, 'балланс пополнен');
+        moneyManager.setMessage(response.success, 'Балланс пополнен');
     } 
     else {
         console.log(response);
@@ -51,7 +51,20 @@ moneyManager.addMoneyCallback = data => ApiConnector.addMoney(data,response => {
     }   
 });
 //#
-//
+moneyManager.conversionMoneyCallback = data => ApiConnector.convertMoney(data,response => {
+    console.log(response);
+    if (response.success) {
+        console.log(response.success);
+        ProfileWidget.showProfile(response.data);
+        moneyManager.setMessage(response.success, 'Сумма сконвертирована');
+    } 
+    else {
+        console.log(response);
+        moneyManager.setMessage(response.success, response.error);
+    }   
+});
+//#
+// conversionMoneyCallback
 
 /*
 addMoney({ currency, amount }, callback) — запрос на добавление денег авторизованному пользователю
