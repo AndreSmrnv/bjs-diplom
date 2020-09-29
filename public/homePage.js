@@ -64,7 +64,20 @@ moneyManager.conversionMoneyCallback = data => ApiConnector.convertMoney(data,re
     }   
 });
 //#
-// conversionMoneyCallback
+moneyManager.sendMoneyCallback = data => ApiConnector.transferMoney(data,response => {
+    console.log(response);
+    if (response.success) {
+        console.log(response.success);
+        ProfileWidget.showProfile(response.data);
+        moneyManager.setMessage(response.success, 'Перевод успешно завершен');
+    } 
+    else {
+        console.log(response);
+        moneyManager.setMessage(response.success, response.error);
+    }   
+});
+//#
+// 
 
 /*
 addMoney({ currency, amount }, callback) — запрос на добавление денег авторизованному пользователю
