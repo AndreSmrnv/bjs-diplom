@@ -77,6 +77,22 @@ moneyManager.sendMoneyCallback = data => ApiConnector.transferMoney(data,respons
     }   
 });
 //#
+const favoritesWidget = new FavoritesWidget();
+ApiConnector.getFavorites(response => {
+    console.log(response);
+    if (response.success) {
+        console.log(response.success);
+        favoritesWidget.clearTable;
+        favoritesWidget.fillTable(response.data);
+        moneyManager.updateUsersList(response.data);
+    }
+    else {
+        console.log(response);
+        favoritesWidget.setMessage(response.success, response.error);
+    } 
+}
+);
+//#
 // 
 
 /*
